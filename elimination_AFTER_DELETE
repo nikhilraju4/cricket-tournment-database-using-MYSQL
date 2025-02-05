@@ -1,0 +1,15 @@
+CREATE DEFINER=`root`@`localhost` TRIGGER
+`elimination_AFTER_DELETE` AFTER DELETE ON `team` FOR EACH ROW
+BEGIN
+declare teamid varchar(10);
+declare cntry_name varchar(15);
+declare rankk int(2);
+declare teamName varchar(15);
+declare noLoses int(2);
+set teamid = old.team_id;
+set cntry_name = old.country_name;
+set rankk = old.team_rank;
+set teamName = old.team_name;
+set noLoses = old.no_of_loses;
+insert into elimination values(teamid, cntry_name, rankk, teamName, noLoses );
+END
